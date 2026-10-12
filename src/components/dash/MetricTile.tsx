@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export function MetricTile({
   deviceId, variable, reading, threshold, f, loading, label,
 }: {
-  deviceId: string; variable: VariableKey; reading?: LatestReading; threshold?: Threshold; f: Freshness; loading?: boolean; label?: string;
+  deviceId: string; variable: VariableKey; reading?: LatestReading | undefined; threshold?: Threshold | undefined; f: Freshness; loading?: boolean; label?: string;
 }) {
   const { prefs } = usePrefs();
   const def = VARIABLES[variable];
@@ -24,7 +24,7 @@ export function MetricTile({
 
   const pts = (series.data ?? []).filter((p) => p.value != null).map((p) => ({ ts: p.ts, v: convert(variable, p.value!, prefs) }));
   const recent = pts.slice(-5);
-  const delta = recent.length > 1 ? recent[recent.length - 1].v - recent[0].v : null;
+  const delta = recent.length > 1 ? recent[recent.length - 1]!.v - recent[0]!.v : null;
   const tol = 10 ** -def.decimals * 2;
   const TrendIcon = delta == null ? null : Math.abs(delta) <= tol ? ArrowRight : delta > 0 ? ArrowUpRight : ArrowDownRight;
   const gid = `g-${deviceId}-${variable}`;

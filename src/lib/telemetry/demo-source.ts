@@ -60,7 +60,7 @@ function valueAt(deviceId: string, v: VariableKey, ts: number): number | null {
 }
 
 const anchor = () => Math.floor(Date.now() / STEP) * STEP;
-const lastSeen = (id: string, now = Date.now()) => now - LAST_SEEN_OFFSET_MIN[id] * 60e3;
+const lastSeen = (id: string, now = Date.now()) => now - (LAST_SEEN_OFFSET_MIN[id] ?? 0) * 60e3;
 
 const DEMO_THRESHOLDS: Record<string, Threshold> = {
   "soil-10:soil_moisture": { min: 25, max: 35, warnMargin: 3, source: "demo" },
@@ -78,7 +78,7 @@ export const demoSource: TelemetrySource = {
       Object.keys(PROFILES).map<DeviceSnapshot>((id) => {
         const seen = lastSeen(id, now);
         const readings: DeviceSnapshot["readings"] = {};
-        for (const v of Object.keys(PROFILES[id]) as VariableKey[]) {
+        for (const v of Object.keys(PROFILES[id] ?? {}) as VariableKey[]) {
           const val = valueAt(id, v, seen);
           readings[v] = { value: val, ts: val == null ? null : seen };
         }
