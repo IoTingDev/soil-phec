@@ -6,7 +6,7 @@ import { fmtAge, fmtTime } from "@/lib/format";
 import { FreshnessBadge } from "./status";
 import { cn } from "@/lib/utils";
 
-export function DeviceCard({ device, snap, f, now, loading }: { device: DeviceDef; snap?: DeviceSnapshot; f: Freshness; now: number | null; loading?: boolean }) {
+export function DeviceCard({ device, snap, f, now, loading }: { device: DeviceDef; snap?: DeviceSnapshot | undefined; f: Freshness; now: number | null; loading?: boolean }) {
   const available = device.variables.filter((v) => snap?.readings[v]?.value != null).length;
   const Icon = device.kind === "water" ? Droplets : Layers;
   return (

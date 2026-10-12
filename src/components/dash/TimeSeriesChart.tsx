@@ -26,7 +26,7 @@ function seriesLabel(s: SeriesSpec) {
  * magnitudes distintas se representan en gráficos separados.
  */
 export function TimeSeriesChart({ series, range, height = 260, threshold, labelBy = "device" }: {
-  series: SeriesSpec[]; range?: RangeKey; height?: number; threshold?: Threshold; labelBy?: "device" | "variable";
+  series: SeriesSpec[]; range?: RangeKey; height?: number; threshold?: Threshold | undefined; labelBy?: "device" | "variable";
 }) {
   const { prefs } = usePrefs();
   const r = range ?? prefs.range;
