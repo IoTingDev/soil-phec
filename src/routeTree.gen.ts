@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AguaRouteImport } from './routes/agua'
+import { Route as ConfiguracionRouteImport } from './routes/configuracion'
+import { Route as DispositivosRouteImport } from './routes/dispositivos'
+import { Route as HistoricoRouteImport } from './routes/historico'
+import { Route as SueloRouteImport } from './routes/suelo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AguaRoute = AguaRouteImport.update({
+  id: '/agua',
+  path: '/agua',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracionRoute = ConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DispositivosRoute = DispositivosRouteImport.update({
+  id: '/dispositivos',
+  path: '/dispositivos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SueloRoute = SueloRouteImport.update({
+  id: '/suelo',
+  path: '/suelo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agua': typeof AguaRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/dispositivos': typeof DispositivosRoute
+  '/historico': typeof HistoricoRoute
+  '/suelo': typeof SueloRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agua': typeof AguaRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/dispositivos': typeof DispositivosRoute
+  '/historico': typeof HistoricoRoute
+  '/suelo': typeof SueloRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agua': typeof AguaRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/dispositivos': typeof DispositivosRoute
+  '/historico': typeof HistoricoRoute
+  '/suelo': typeof SueloRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/agua' | '/configuracion' | '/dispositivos' | '/historico' | '/suelo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/agua' | '/configuracion' | '/dispositivos' | '/historico' | '/suelo'
+  id:
+    | '__root__'
+    | '/'
+    | '/agua'
+    | '/configuracion'
+    | '/dispositivos'
+    | '/historico'
+    | '/suelo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AguaRoute: typeof AguaRoute
+  ConfiguracionRoute: typeof ConfiguracionRoute
+  DispositivosRoute: typeof DispositivosRoute
+  HistoricoRoute: typeof HistoricoRoute
+  SueloRoute: typeof SueloRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agua': {
+      id: '/agua'
+      path: '/agua'
+      fullPath: '/agua'
+      preLoaderRoute: typeof AguaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracion': {
+      id: '/configuracion'
+      path: '/configuracion'
+      fullPath: '/configuracion'
+      preLoaderRoute: typeof ConfiguracionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dispositivos': {
+      id: '/dispositivos'
+      path: '/dispositivos'
+      fullPath: '/dispositivos'
+      preLoaderRoute: typeof DispositivosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suelo': {
+      id: '/suelo'
+      path: '/suelo'
+      fullPath: '/suelo'
+      preLoaderRoute: typeof SueloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AguaRoute: AguaRoute,
+  ConfiguracionRoute: ConfiguracionRoute,
+  DispositivosRoute: DispositivosRoute,
+  HistoricoRoute: HistoricoRoute,
+  SueloRoute: SueloRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
