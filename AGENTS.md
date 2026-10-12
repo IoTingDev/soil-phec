@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+- Frontend only: all data flows through `TelemetrySource` (src/lib/telemetry); demo source is the only implementation until the platform contract exists — never invent endpoints/topics.
+- Readings are classified only when a threshold exists; freshness derives from the device's last-message timestamp.
