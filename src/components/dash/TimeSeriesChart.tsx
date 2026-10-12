@@ -30,12 +30,14 @@ export function TimeSeriesChart({ series, range, height = 260, threshold, labelB
 }) {
   const { prefs } = usePrefs();
   const r = range ?? prefs.range;
+  const s0 = series[0]!;
+  const s1 = series[1];
   // Número fijo de series por gráfico (máx. 2) → hooks estables.
-  const a = useSeries(series[0].deviceId, series[0].variable, r);
-  const b = useSeries(series[1]?.deviceId ?? series[0].deviceId, series[1]?.variable ?? series[0].variable, r);
+  const a = useSeries(s0.deviceId, s0.variable, r);
+  const b = useSeries(s1?.deviceId ?? s0.deviceId, s1?.variable ?? s0.variable, r);
   const results = series.length > 1 ? [a, b] : [a];
 
-  const v0 = series[0].variable;
+  const v0 = s0.variable;
   const unit = unitOf(v0, prefs);
   const loading = results.some((q) => q.isLoading);
   const error = results.find((q) => q.isError);
@@ -45,14 +47,15 @@ export function TimeSeriesChart({ series, range, height = 260, threshold, labelB
 
   const map = new Map<number, Record<string, number | null>>();
   results.forEach((q, i) => {
-    const k = keyOf(series[i]);
+    const spec = series[i]!;
+    const k = keyOf(spec);
     for (const p of q.data ?? []) {
-      const row = map.get(p.ts) ?? { ts: p.ts };
-      row[k] = p.value == null ? null : convert(series[i].variable, p.value, prefs);
+      const row: Record<string, number | null> = map.get(p.ts) ?? { ts: p.ts };
+      row[k] = p.value == null ? null : convert(spec.variable, p.value, prefs);
       map.set(p.ts, row);
     }
   });
-  const data = [...map.values()].sort((x, y) => (x.ts as number) - (y.ts as number));
+  const data = [...map.values()].sort((x, y) => (x["ts"] as number) - (y["ts"] as number));
   if (!data.length || results.every((q) => !q.data?.length))
     return <div style={{ height }}><StateBox kind="empty" title="Sin datos en el rango seleccionado">El dispositivo no ha reportado lecturas para este periodo.</StateBox></div>;
 
@@ -69,7 +72,7 @@ export function TimeSeriesChart({ series, range, height = 260, threshold, labelB
         <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
           <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" vertical={false} />
           {threshold && (threshold.min != null || threshold.max != null) && (
-            <ReferenceArea y1={threshold.min} y2={threshold.max} fill="var(--status-ok)" fillOpacity={0.06} stroke="var(--status-ok)" strokeOpacity={0.25} strokeDasharray="4 4" ifOverflow="extendDomain" />
+            <ReferenceArea {...(threshold.min != null ? { y1: threshold.min } : {})} {...(threshold.max != null ? { y2: threshold.max } : {})} fill="var(--status-ok)" fillOpacity={0.06} stroke="var(--status-ok)" strokeOpacity={0.25} strokeDasharray="4 4" ifOverflow="extendDomain" />
           )}
           <XAxis dataKey="ts" type="number" scale="time" domain={["dataMin", "dataMax"]} tickFormatter={tickFmt} tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} stroke="var(--border)" minTickGap={40} />
           <YAxis
