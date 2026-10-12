@@ -30,7 +30,7 @@ function Historico() {
   const [v, setV] = useState<VariableKey>("soil_moisture");
   const [range, setRange] = useState<RangeKey>(prefs.range);
   const d = getDevice(dev);
-  const variable = d.variables.includes(v) ? v : d.variables[0];
+  const variable = d.variables.includes(v) ? v : d.variables[0]!;
   const q = useSeries(dev, variable, range);
   const rows = (q.data ?? []).filter((p) => p.value != null).slice(-50).reverse();
 

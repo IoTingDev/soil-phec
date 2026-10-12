@@ -81,7 +81,7 @@ export function TimeSeriesChart({ series, range, height = 260, threshold, labelB
             tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
             stroke="var(--border)"
             tickFormatter={(v: number) => v.toLocaleString("es-CO", { maximumFractionDigits: VARIABLES[v0].decimals })}
-            label={unit ? { value: unit, angle: -90, position: "insideLeft", offset: 12, style: { fontSize: 11, fill: "var(--muted-foreground)" } } : undefined}
+            {...(unit ? { label: { value: unit, angle: -90, position: "insideLeft", offset: 12, style: { fontSize: 11, fill: "var(--muted-foreground)" } } } : {})}
           />
           <Tooltip
             content={({ active, payload, label }) => {
