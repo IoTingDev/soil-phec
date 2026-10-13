@@ -3,7 +3,7 @@ import { useId } from "react";
 /** Scale is an observed display range, never a sensor limit or an agronomic threshold. */
 export function MetricGauge({ value, min, max, color, target }: {
   value: number; min: number; max: number; color: string;
-  target?: { min?: number; max?: number };
+  target?: { min?: number | undefined; max?: number | undefined } | undefined;
 }) {
   const id = useId();
   const ratio = (v: number) => Math.max(0, Math.min(1, (v - min) / (max - min || 1)));

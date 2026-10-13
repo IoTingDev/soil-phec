@@ -11,6 +11,8 @@ import { Panel, SectionTitle } from "@/components/dash/status";
 export const Route = createFileRoute("/agua")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Calidad de agua · IoTing Dev Agro" },
       { name: "description", content: "Temperatura, pH, EC, TDS y salinidad del sensor Water-01." },
       { property: "og:title", content: "Calidad de agua · IoTing Dev Agro" },

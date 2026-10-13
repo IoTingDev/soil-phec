@@ -15,6 +15,8 @@ import { Panel, StateBox } from "@/components/dash/status";
 export const Route = createFileRoute("/historico")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Histórico y tendencias · IoTing Dev Agro" },
       { name: "description", content: "Evolución temporal configurable de cada variable y dispositivo." },
       { property: "og:title", content: "Histórico y tendencias · IoTing Dev Agro" },

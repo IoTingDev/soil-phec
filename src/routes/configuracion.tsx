@@ -12,6 +12,8 @@ import type { ReactNode } from "react";
 export const Route = createFileRoute("/configuracion")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Configuración · IoTing Dev Agro" },
       { name: "description", content: "Preferencias de visualización, unidades y parámetros de interfaz." },
       { property: "og:title", content: "Configuración · IoTing Dev Agro" },

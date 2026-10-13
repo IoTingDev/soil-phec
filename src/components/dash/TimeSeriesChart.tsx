@@ -14,7 +14,7 @@ const keyOf = (s: SeriesSpec) => `${s.deviceId}__${s.variable}`;
 function seriesLabel(s: SeriesSpec) { const d = getDevice(s.deviceId); return `${d.name}${d.depthCm ? ` (${d.depthCm} cm)` : ""}`; }
 
 export function TimeSeriesChart({ series, range, height = 280, threshold, labelBy = "device" }: {
-  series: SeriesSpec[]; range?: RangeKey; height?: number; threshold?: Threshold; labelBy?: "device" | "variable";
+  series: SeriesSpec[]; range?: RangeKey; height?: number; threshold?: Threshold | undefined; labelBy?: "device" | "variable";
 }) {
   const { prefs } = usePrefs();
   const [mode, setMode] = useState<"area" | "line">("area");
@@ -37,7 +37,7 @@ export function TimeSeriesChart({ series, range, height = 280, threshold, labelB
     if (!spec) return;
     for (const p of q.data ?? []) { const row = map.get(p.ts) ?? { ts: p.ts }; row[keyOf(spec)] = p.value == null ? null : convert(spec.variable, p.value, prefs); map.set(p.ts, row); }
   });
-  const data = [...map.values()].sort((x, y) => Number(x.ts) - Number(y.ts));
+  const data = [...map.values()].sort((x, y) => Number(x["ts"]) - Number(y["ts"]));
   if (!data.length || !data.some(row => series.some(s => row[keyOf(s)] != null))) return <div style={{ height }}><StateBox kind="empty" title="Sin datos en el rango seleccionado">El dispositivo no ha reportado lecturas para este periodo.</StateBox></div>;
   const tickFmt = (ts: number) => r === "24h" ? new Date(ts).toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit", hour12: false }) : new Date(ts).toLocaleDateString("es-CO", { day: "2-digit", month: "short" });
   const number = (n: number) => n.toLocaleString("es-CO", { maximumFractionDigits: VARIABLES[v0].decimals });

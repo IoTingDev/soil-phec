@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { useId } from "react";
 
 export function MetricTile({ deviceId, variable, reading, threshold, f, loading, label }: {
-  deviceId: string; variable: VariableKey; reading?: LatestReading; threshold?: Threshold; f: Freshness; loading?: boolean; label?: string;
+  deviceId: string; variable: VariableKey; reading?: LatestReading | undefined; threshold?: Threshold | undefined; f: Freshness; loading?: boolean; label?: string;
 }) {
   const { prefs } = usePrefs();
   const def = VARIABLES[variable];
