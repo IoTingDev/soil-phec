@@ -58,6 +58,7 @@ export function MetricTile({ deviceId, variable, reading, threshold, f, loading,
           </div>
         </>}
       </div>
+      {displayed != null && <div className="mb-2 flex justify-between gap-1 text-[9px] text-muted-foreground" title="Escala visual derivada de las lecturas disponibles y del objetivo configurado"><span className="num">{number(min)}</span><span>Escala observada</span><span className="num">{number(max)}</span></div>}
       <div className="flex min-h-7 flex-wrap items-center justify-between gap-1 border-t pt-2 text-[10px] text-muted-foreground">
         <span>{f === "live" ? "Última lectura" : f === "nodata" ? "Sin datos" : "Lectura anterior"}</span>
         {TrendIcon && delta != null && <span className="num inline-flex items-center gap-0.5" title="Variación de las últimas cinco lecturas disponibles"><TrendIcon className="h-3.5 w-3.5" />{delta > 0 ? "+" : ""}{number(delta)} {unit}</span>}
