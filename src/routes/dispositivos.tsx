@@ -9,6 +9,8 @@ import { FreshnessBadge, Panel } from "@/components/dash/status";
 export const Route = createFileRoute("/dispositivos")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Dispositivos · IoTing Dev Agro" },
       { name: "description", content: "Estado de los nodos ESP32 y sensores Honde Tech." },
       { property: "og:title", content: "Dispositivos · IoTing Dev Agro" },

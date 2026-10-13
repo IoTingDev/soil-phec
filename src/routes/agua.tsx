@@ -11,6 +11,8 @@ import { Panel, SectionTitle } from "@/components/dash/status";
 export const Route = createFileRoute("/agua")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Calidad de agua · IoTing Dev Agro" },
       { name: "description", content: "Temperatura, pH, EC, TDS y salinidad del sensor Water-01." },
       { property: "og:title", content: "Calidad de agua · IoTing Dev Agro" },
@@ -33,7 +35,7 @@ function Agua() {
       {(fr === "stale" || fr === "offline") && (
         <div className="mb-4 flex items-center gap-2 rounded-md border border-status-warn/40 bg-status-warn/10 p-3 text-sm">
           <Clock className="h-4 w-4 shrink-0 text-status-warn" />
-          Datos antiguos: el último mensaje se recibió <span className="num font-medium">{fmtAge(s?.lastSeen ?? null, f.now)}</span>. Los valores mostrados corresponden a esa lectura.
+          <p>Datos antiguos: el último mensaje se recibió <span className="num font-medium">{fmtAge(s?.lastSeen ?? null, f.now)}</span>. Los valores mostrados corresponden a esa lectura.</p>
         </div>
       )}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">

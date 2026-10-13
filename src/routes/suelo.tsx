@@ -12,6 +12,8 @@ import { FreshnessBadge, Panel, SectionTitle } from "@/components/dash/status";
 export const Route = createFileRoute("/suelo")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Monitoreo de suelo · IoTing Dev Agro" },
       { name: "description", content: "Humedad, temperatura, EC, pH, NPK y salinidad a 10 cm y 30 cm." },
       { property: "og:title", content: "Monitoreo de suelo · IoTing Dev Agro" },

@@ -13,6 +13,8 @@ import { Panel, SectionTitle } from "@/components/dash/status";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Resumen · IoTing Dev Agro" },
       { name: "description", content: "Estado general de sensores de suelo y agua: conectividad, indicadores y alertas." },
       { property: "og:title", content: "Resumen · IoTing Dev Agro" },

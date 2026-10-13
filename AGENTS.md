@@ -12,3 +12,4 @@
 ## Architecture
 - Frontend only: all data flows through `TelemetrySource` (src/lib/telemetry); demo source is the only implementation until the platform contract exists — never invent endpoints/topics.
 - Readings are classified only when a threshold exists; freshness derives from the device's last-message timestamp.
+- Visualization components derive gauge scales from observed series and configured targets, not assumed sensor limits, to avoid implying unverified measurement ranges.
