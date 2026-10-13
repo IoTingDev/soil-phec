@@ -75,7 +75,7 @@ export function Panel({ title, subtitle, actions, children, className }: { title
 
 export function SectionTitle({ children, hint }: { children: ReactNode; hint?: ReactNode }) {
   return (
-    <div className="mb-3 mt-8 flex items-baseline justify-between gap-3 first:mt-0">
+    <div className="mb-3 mt-8 flex items-baseline justify-between gap-3">
       <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">{children}</h2>
       {hint && <span className="text-xs text-muted-foreground">{hint}</span>}
     </div>
